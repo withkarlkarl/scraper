@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests, urllib, os, re, socket, threading, time, random, itertools
+import requests, os, re, threading, time, random, itertools
 
 session = requests.session()
 cookies = 'SINAGLOBAL=6087263830616.329.1470624981105; un=withkarlkarl@sina.com; wvr=6; SCF=Au1BWirJ3i9F0xLXT53SY4g6oReD_QCzlmJu4Jf302ASvRPX8sSeyS0_3PFngDCl9SR9rKwYjbnmvqXbMr5wXPY.; SUB=_2A256wljuDeTxGedN6lEX8SnEyTmIHXVZts0mrDV8PUNbmtBeLVTVkW8AmZnaXzwETcpZBOv-Uv75uWQ1JA..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFPiQSYxV3HvSaJCBTePcSf5JpX5KMhUgL.Fo20eKeceKMReo-2dJLoIpShi--ci-2Ei-2ci--fiK.7iKLF; SUHB=0wnEqtB8A5UD4C; ALF=1504140348; SSOLoginState=1472604350; _s_tentry=login.sina.com.cn; UOR=www.jianshu.com,service.weibo.com,login.sina.com.cn; Apache=5788149204163.788.1472604254398; ULV=1472604254421:38:38:3:5788149204163.788.1472604254398:1472524429783; USRANIME=usrmdinst_5; WBStore=0e9767219e7dbe35|undefined'
@@ -11,6 +11,7 @@ album_url = [
         str(i)) for i in range(1, 15)]
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'}
+
 # 保存路径
 SAVE_PATH = "image" + 'Eric1' + "/"
 if not os.path.exists(SAVE_PATH):
@@ -95,7 +96,4 @@ with open(r'./photo_urls100.txt', 'r') as txt:
         threads.append(threading.Thread(target=save_image, args=(line.strip(),)))
     for t in threads:
         t.start()
-
-# for line in open('photo_add.txt'):
-#     save_image(line.strip())
 
