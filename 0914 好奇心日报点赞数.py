@@ -63,12 +63,6 @@ def soup_parse(text):
         item_date = item.find('span', class_="smart-date").get_text()
         # 文章地址
         item_url = 'http://www.qdaily.com/' + item.find('a', href=True).get('href')
-        print(item_tag)
-        print(item_title)
-        print(item_comments)
-        print(item_heart)
-        print(item_date)
-        print(item_url)
         # 把数据写入MongoDB
         article_0914.insert_one({
             'tag': item_tag,
@@ -81,7 +75,7 @@ def soup_parse(text):
     # 传入数据分析方法
     mongo_pipe(article_0914)
 
-#
+# Mongodb筛选
 def mongo_pipe(collection):
     # 点赞数最高的10篇文章
     pipeline1 = [
@@ -115,25 +109,4 @@ def mongo_pipe(collection):
             file.write(str(j)+'\n')
 
 
-# main()
-# hhtml = open('Untitled-1.html', 'r', encoding='utf-8').read()
-# soup_parse(hhtml)
-mongo_pipe(article_0914)
-
-'''
-[('heart', 283), ('comments', 41), ('title', '既没文化也没创意的文创产品，谁要买啊？| 好奇心研究所'), ('tag', '商业'), ('date', '9 月 11 日'), ('url', 'http://www.qdaily.com//articles/31991.html')]
-[('heart', 273), ('comments', 16), ('title', '新加坡这座植物园一般的豪宅，想就这样代代相传下去'), ('tag', '设计'), ('date', '9 月 12 日'), ('url', 'http://www.qdaily.com//articles/32101.html')]
-[('heart', 196), ('comments', 14), ('title', '无论什么灵感，这本笔记本都能记下来｜这个设计了不起'), ('tag', '设计'), ('date', '9 月 12 日'), ('url', 'http://www.qdaily.com//articles/32077.html')]
-[('heart', 165), ('comments', 8), ('title', '纽约曼哈顿可能最具创造力的住宅，将在秋天全面完工'), ('tag', '设计'), ('date', '昨天'), ('url', 'http://www.qdaily.com//articles/32130.html')]
-[('heart', 126), ('comments', 85), ('title', '我们对新 iPhone 的热情，已经越来越低了 | 好奇心小数据'), ('tag', '智能'), ('date', '9 月 12 日'), ('url', 'http://www.qdaily.com//articles/32091.html')]
-[('heart', 112), ('comments', 45), ('title', '大公司头条：支付宝提现也要收手续费了'), ('tag', '商业'), ('date', '9 月 12 日'), ('url', 'http://www.qdaily.com//articles/32079.html')]
-[('heart', 101), ('comments', 9), ('title', '大公司头条：Google 和药厂成立合资公司治疗糖尿病，苹果可能下月发布 Mac 的大更新'), ('tag', '智能'), ('date', '昨天'), ('url', 'http://www.qdaily.com//articles/32138.html')]
-[('heart', 100), ('comments', 0), ('title', '为无人车做准备，日本开始做给车看的 3D 地图了'), ('tag', '智能'), ('date', '9 月 12 日'), ('url', 'http://www.qdaily.com//articles/31975.html')]
-[('heart', 91), ('comments', 5), ('title', '这个德国摄影师，拍摄了上千座残破却美丽的欧洲废弃建筑'), ('tag', '设计'), ('date', '昨天'), ('url', 'http://www.qdaily.com//articles/32136.html')]
-[('heart', 87), ('comments', 17), ('title', '2016 年《大都会》宜居城市评选，第一名又是哥本哈根'), ('tag', '设计'), ('date', '昨天'), ('url', 'http://www.qdaily.com//articles/32159.html')]
-{'_id': '城市', 'count': 1}
-{'_id': '娱乐', 'count': 1}
-{'_id': '智能', 'count': 4}
-{'_id': '商业', 'count': 7}
-{'_id': '设计', 'count': 7}
-'''
+main()
